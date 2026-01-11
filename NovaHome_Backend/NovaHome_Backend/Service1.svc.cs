@@ -8,26 +8,65 @@ using System.Text;
 
 namespace NovaHome_Backend
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class Service1 : IService1
+   public class Service1 : IService1
     {
-        public string GetData(int value)
+        //link db with service 
+        DataClasses1DataContext db = new DataClasses1DataContext();
+        public List<Product> getProducts()
         {
-            return string.Format("You entered: {0}", value);
+            //find active prods and turn into a list
+            dynamic prods = (from p in db.Products
+                             where p.isActive.Equals(1)
+                             select p).ToList();
+
+            //return prods
+            return prods;
+            
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public bool isLoggedIn(string email, string password)
         {
-            if (composite == null)
+            //find user 
+            var user = (from u in db.SystemUsers
+                        where u.Email == email && u.Password == password
+                        select u).FirstOrDefault();
+
+            //check if user exists 
+            if(user != null)
             {
-                throw new ArgumentNullException("composite");
+                //create login record - tracking user login activity
+                var login = new UserLogin
+                {
+                    UserId = user.UserId,
+                    LoginAt = DateTime.Now
+                };
+                db.UserLogins.InsertOnSubmit(login);
+                db.SubmitChanges();
+               
+                return true;//user exists
             }
-            if (composite.BoolValue)
+            else
             {
-                composite.StringValue += "Suffix";
+                return false; //user doesnt exist
             }
-            return composite;
+        }
+
+        public bool isReg(SystemUser user)
+        {
+            //insert to db 
+            db.SystemUsers.InsertOnSubmit(user);
+            //submit changes to db
+            try
+            {
+                //successful registration
+                db.SubmitChanges();
+                return true;
+            }
+            catch
+            {
+                //unsuccessful registration
+                return false;
+            }
         }
     }
 }
