@@ -64,7 +64,7 @@
         <!--navbar start-->
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
-                <a class="navbar-brand" href="index.html">NovaHome</a>
+                <a class="navbar-brand" href="index.aspx">NovaHome</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span>Menu
                 </button>
@@ -76,7 +76,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
                                 <a class="dropdown-item" href="shop.aspx">Shop</a>
-                                <a class="dropdown-item" href="product-single.aspx">Single Product</a>
+                                <a class="dropdown-item" href="product.aspx">Single Product</a>
                                 <a class="dropdown-item" href="cart.aspx">Cart</a>
                                 <a class="dropdown-item" href="checkout.aspx">Checkout</a>
                             </div>
