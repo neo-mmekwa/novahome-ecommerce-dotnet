@@ -84,8 +84,9 @@
                         <li class="nav-item"><a href="about.aspx" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="blog.aspx" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="contact.aspx" class="nav-link">Contact</a></li>
+                        <li class="nav-item cta cta-colored"><a href="wishlist.aspx" class="nav-link"><span class="icon-heart"></span></a></li>
                         <li class="nav-item cta cta-colored"><a href="cart.aspx" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-                        <li class="nav-item cta cta-colored"><a href="register.aspx" class="nav-link"><span class="icon-user"></span></a></li>
+                        <li class="nav-item cta cta-colored"><a href="login.aspx" class="nav-link"><span class="icon-user"></span></a></li>
                     </ul>
                 </div>
             </div>
