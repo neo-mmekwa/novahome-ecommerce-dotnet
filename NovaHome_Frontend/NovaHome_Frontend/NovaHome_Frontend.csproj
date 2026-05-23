@@ -156,6 +156,7 @@
     <Content Include="product.aspx" />
     <Content Include="register.aspx" />
     <Content Include="shop.aspx" />
+    <Content Include="userManagement.aspx" />
     <Content Include="Web.config" />
     <Content Include="wishlist.aspx" />
   </ItemGroup>
@@ -231,6 +232,13 @@
     </Compile>
     <Compile Include="shop.aspx.designer.cs">
       <DependentUpon>shop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userManagement.aspx.cs">
+      <DependentUpon>userManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userManagement.aspx.designer.cs">
+      <DependentUpon>userManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="wishlist.aspx.cs">
       <DependentUpon>wishlist.aspx</DependentUpon>
