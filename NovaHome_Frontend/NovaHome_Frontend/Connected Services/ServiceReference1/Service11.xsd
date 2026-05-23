@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/NovaHome_Backend" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NovaHome_Backend" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="SystemUserDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="isActive" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SystemUserDTO" nillable="true" type="tns:SystemUserDTO" />
+</xs:schema>

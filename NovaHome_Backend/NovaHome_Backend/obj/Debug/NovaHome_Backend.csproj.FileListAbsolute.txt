@@ -1,0 +1,7 @@
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Backend\NovaHome_Backend\bin\NovaHome_Backend.dll.config
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Backend\NovaHome_Backend\bin\NovaHome_Backend.dll
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Backend\NovaHome_Backend\bin\NovaHome_Backend.pdb
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Backend\NovaHome_Backend\obj\Debug\NovaHome_Backend.csproj.AssemblyReference.cache
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Backend\NovaHome_Backend\obj\Debug\NovaHome_Backend.csproj.CoreCompileInputs.cache
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Backend\NovaHome_Backend\obj\Debug\NovaHome_Backend.dll
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Backend\NovaHome_Backend\obj\Debug\NovaHome_Backend.pdb

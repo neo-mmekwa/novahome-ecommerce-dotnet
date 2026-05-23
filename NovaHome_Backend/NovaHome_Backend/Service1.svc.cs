@@ -12,17 +12,6 @@ namespace NovaHome_Backend
     {
         //link db with service 
         DataClasses1DataContext db = new DataClasses1DataContext();
-        public List<Product> getProducts()
-        {
-            //find active prods and turn into a list
-            dynamic prods = (from p in db.Products
-                             where p.isActive.Equals(1)
-                             select p).ToList();
-
-            //return prods
-            return prods;
-            
-        }
 
         public bool isLoggedIn(string email, string password)
         {
@@ -51,22 +40,101 @@ namespace NovaHome_Backend
             }
         }
 
-        public bool isReg(SystemUser user)
+
+        string IService1.isReg(SystemUserDTO user)
         {
-            //insert to db 
-            db.SystemUsers.InsertOnSubmit(user);
-            //submit changes to db
             try
             {
-                //successful registration
+                //check if user exists by email 
+                var existingEmail = (from u in db.SystemUsers
+                                     where u.Email == user.Email
+                                     select u).FirstOrDefault();
+
+                //email exists return false
+                if (existingEmail != null)
+                    return "Email already in use";
+
+                //check if user exists by phone number
+                var existingNumber = (from u in db.SystemUsers
+                                      where u.PhoneNumber == user.PhoneNumber
+                                      select u).FirstOrDefault();
+                //phone number exists return false
+                if (existingNumber != null)
+                    return "Phone number already in use";
+
+                //user doesnt exist then create new user
+                SystemUser newUser = new SystemUser
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Password = user.Password,
+                    isActive = user.isActive,
+                    DateAdded = DateTime.Now
+                };
+
+                //insert new user to db
+                db.SystemUsers.InsertOnSubmit(newUser);
                 db.SubmitChanges();
-                return true;
+
+                //set user role to customer by default
+                /*
+                UserRole userRole = new UserRole
+                {
+                    userId = newUser.UserId,
+                    roleId = 1
+                };
+                //insert user role in db
+                db.UserRoles.InsertOnSubmit(userRole);
+                db.SubmitChanges();*/
+
+                return "success";
             }
-            catch
+            catch (Exception ex)
             {
-                //unsuccessful registration
+                //catch any errors 
+                return "Error: " + ex.Message;
+            }
+
+        }
+
+        bool IService1.setUserRole(int userId, int roleId)
+        {
+            //find user using id 
+            var user = (from u in db.UserRoles
+                        where u.userId == userId && u.roleId == roleId
+                        select u).FirstOrDefault();
+
+            // if user does not exist
+            if(user == null)
+            {
+                //set the users additional role 
+                UserRole userRole = new UserRole
+                {
+                    userId = userId,
+                    roleId = roleId
+                };
+
+                //insert in db 
+                db.UserRoles.InsertOnSubmit(userRole);
+                try
+                {
+                    //submit chnages 
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
                 return false;
             }
         }
+
+
     }
 }

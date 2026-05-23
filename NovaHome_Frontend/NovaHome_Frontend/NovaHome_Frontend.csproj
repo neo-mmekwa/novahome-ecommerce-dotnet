@@ -44,6 +44,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -70,6 +72,12 @@
     <Content Include="about.aspx" />
     <Content Include="cart.aspx" />
     <Content Include="checkout.aspx" />
+    <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="contact.aspx" />
     <Content Include="css\ajax-loader.gif" />
     <Content Include="css\animate.css" />
@@ -182,6 +190,11 @@
     <Compile Include="checkout.aspx.designer.cs">
       <DependentUpon>checkout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="contact.aspx.cs">
       <DependentUpon>contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,6 +239,7 @@
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Secrecy.cs" />
     <Compile Include="shop.aspx.cs">
       <DependentUpon>shop.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -277,6 +291,16 @@
     <Content Include="fonts\open-iconic\open-iconic.ttf" />
     <Content Include="fonts\open-iconic\open-iconic.woff" />
     <Content Include="js\.DS_Store" />
+    <None Include="Connected Services\ServiceReference1\Service1.wsdl" />
+    <None Include="Connected Services\ServiceReference1\Service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\Service11.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ServiceReference1\Service12.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Content Include="scss\.DS_Store" />
     <Content Include="scss\bootstrap\.DS_Store" />
@@ -376,6 +400,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NovaHome_Frontend.ServiceReference1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,31 @@ namespace NovaHome_Frontend
 {
     public partial class login : System.Web.UI.Page
     {
+        Service1Client client = new Service1Client();
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            //hash password 
+            var pass = Secrecy.HashPassword(password.Value);
+
+            //ask service if user is logged in 
+            var isLoggedIn = client.isLoggedIn(email.Value, pass);
+
+            //redierect user
+            if(isLoggedIn == true)
+            {
+                Response.Redirect("index.aspx");
+            }
+            else
+            {
+                lblResponse.Text = "Log in failed";
+            }
+
+            
         }
     }
 }

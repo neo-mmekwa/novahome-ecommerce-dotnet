@@ -23,13 +23,15 @@
                 <div class="col-md-6 order-md-last d-flex">
                     <div action="#" class="bg-white p-5 contact-form">
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email">
+                            <input type="email" id="email" runat="server" class="form-control" placeholder="Your Email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password">
+                            <input type="password" id="password" runat="server" class="form-control" placeholder="Your Password">
                         </div>
+                         <asp:Label ID="lblResponse" runat="server" Text=""></asp:Label>
                         <div class="form-group text-center">
-                            <input type="submit" value="Login" class="btn btn-primary py-3 px-5">
+                            <!--<input type="submit" value="Login" class="btn btn-primary py-3 px-5">-->
+                            <asp:Button ID="btnLogin" runat="server" type="submit" class="btn btn-primary py-3 px-5" Text="Login" OnClick="btnLogin_Click"/>
                         </div>
                         <div class="form-group text-center">
                             <p>Don't have an account? <a href="register.aspx">Register</a></p>

@@ -8,17 +8,45 @@ using System.Text;
 
 namespace NovaHome_Backend
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface IService1
     {
         [OperationContract]
-        bool isReg(SystemUser user);
+        string isReg(SystemUserDTO user);
 
         [OperationContract]
         bool isLoggedIn(string email, string password);
 
         [OperationContract]
-        List<Product> getProducts();
+        bool setUserRole(int userId, int roleId);
     }
+
+    [DataContract]
+    public class SystemUserDTO
+    {
+        [DataMember]
+        public string FirstName { get; set; }
+
+        [DataMember]
+        public string LastName { get; set; }
+
+        [DataMember]
+        public string Email { get; set; }
+        [DataMember]
+        public string PhoneNumber { get; set; }
+        [DataMember]
+        public string Password { get; set; }
+        [DataMember]
+        public bool isActive { get; set; }
+    }
+
+    public class UserRoleDTO
+    { 
+        [DataMember]
+        public int UserId { get; set; }
+
+        [DataMember]
+        public int RoldId { get; set; }
+    }
+
 }
