@@ -11,6 +11,7 @@ namespace NovaHome_Backend
     [ServiceContract]
     public interface IService1
     {
+        //USER MANAGEMENT 
         [OperationContract]
         string isReg(SystemUserDTO user);
 
@@ -27,6 +28,8 @@ namespace NovaHome_Backend
         bool setUserRole(int userId, int roleId);
     }
 
+
+    //USER MANAGEMENT 
     [DataContract]
     public class SystemUserDTO
     {

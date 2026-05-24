@@ -72,22 +72,63 @@
 
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.aspx" class="nav-link">Home</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
+                        <li class="nav-item active" id="liHome" runat="server"><a href="index.aspx" class="nav-link">Home</a></li>
+
+                        <li class="nav-item dropdown" id="ddShop" runat="server">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
                                 <a class="dropdown-item" href="shop.aspx">Shop</a>
                                 <a class="dropdown-item" href="product.aspx">Single Product</a>
                                 <a class="dropdown-item" href="cart.aspx">Cart</a>
-                                <a class="dropdown-item" href="checkout.aspx">Checkout</a>
+                                <a class="dropdown-item" href="checkout">Checkout</a>
                             </div>
                         </li>
-                        <li class="nav-item"><a href="about.aspx" class="nav-link">About</a></li>
-                        <li class="nav-item"><a href="contact.aspx" class="nav-link">Contact</a></li>
-                        <li class="nav-item"><a href="logout.aspx" class="nav-link">Logout</a></li>
-                        <li class="nav-item cta cta-colored"><a href="wishlist.aspx" class="nav-link"><span class="icon-heart"></span></a></li>
-                        <li class="nav-item cta cta-colored"><a href="cart.aspx" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
-                        <li class="nav-item cta cta-colored"><a href="login.aspx" class="nav-link"><span class="icon-user"></span></a></li>
+                        <li class="nav-item" id="liAbout" runat="server"><a href="about.aspx" class="nav-link">About</a></li>
+                        <li class="nav-item" id="liContact" runat="server"><a href="contact.aspx" class="nav-link">Contact</a></li>
+                        
+                        <li class="nav-item dropdown" id="ddMyAccount" runat="server">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown05" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="#">Reset Password</a>
+                                <a class="dropdown-item" href="logout.aspx">Logout</a>
+                                <a class="dropdown-item" href="#">Order History</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown" id="ddProdManagement" runat="server">
+                            <a class="nav-link dropdown-toggle" href="#" id="A1" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="#">View</a>
+                                <a class="dropdown-item" href="#">Add</a>
+                                <a class="dropdown-item" href="#">Edit</a>
+                                <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown" id="ddOrderManagement" runat="server">
+                            <a class="nav-link dropdown-toggle" href="#" id="A3" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Orders</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="#">View</a>
+                                <a class="dropdown-item" href="#">Add</a>
+                                <a class="dropdown-item" href="#">Edit</a>
+                                <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown" id="ddUserManagement" runat="server">
+                            <a class="nav-link dropdown-toggle" href="#" id="A2" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="#">View</a>
+                                <a class="dropdown-item" href="#">Add</a>
+                                <a class="dropdown-item" href="logout.aspx">Edit</a>
+                                <a class="dropdown-item" href="#">Delete</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item cta cta-colored" id="liWishlist" runat="server"><a href="wishlist.aspx" class="nav-link"><span class="icon-heart"></span></a></li>
+                        <li class="nav-item cta cta-colored" id="liCart" runat="server"><a href="cart.aspx" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+                        <li class="nav-item cta cta-colored" id="liLogin" runat="server"><a href="login.aspx" class="nav-link"><span class="icon-user"></span></a></li>
                     </ul>
                 </div>
             </div>
