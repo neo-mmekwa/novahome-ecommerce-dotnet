@@ -49,7 +49,8 @@
                             </div>
                             <div class="col-md pr-4 d-flex topper align-items-center">
                                 <div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-                                <span class="text">info@novahome.com</span>
+                                <!--<span class="text" id="email" runat="server">info@novahome.com</span>-->
+                                <asp:Label ID="lblName" runat="server" class="text" Text="info@novahome.com"></asp:Label>
                             </div>
                             <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
                                 <span class="text">7-14 Business days delivery &amp; Free Returns</span>
@@ -82,8 +83,8 @@
                             </div>
                         </li>
                         <li class="nav-item"><a href="about.aspx" class="nav-link">About</a></li>
-                        <!--<li class="nav-item"><a href="blog.aspx" class="nav-link">Blog</a></li>-->
                         <li class="nav-item"><a href="contact.aspx" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a href="logout.aspx" class="nav-link">Logout</a></li>
                         <li class="nav-item cta cta-colored"><a href="wishlist.aspx" class="nav-link"><span class="icon-heart"></span></a></li>
                         <li class="nav-item cta cta-colored"><a href="cart.aspx" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
                         <li class="nav-item cta cta-colored"><a href="login.aspx" class="nav-link"><span class="icon-user"></span></a></li>

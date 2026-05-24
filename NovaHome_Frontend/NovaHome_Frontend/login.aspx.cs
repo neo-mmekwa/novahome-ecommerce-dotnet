@@ -22,11 +22,25 @@ namespace NovaHome_Frontend
             var pass = Secrecy.HashPassword(password.Value);
 
             //ask service if user is logged in 
-            var isLoggedIn = client.isLoggedIn(email.Value, pass);
+            var ur = client.isLoggedIn(email.Value, pass);
 
             //redierect user
-            if(isLoggedIn == true)
+            if(ur != null)
             {
+                //user info
+                int userId = ur.userId;
+                int roleId = ur.roleId;
+                string name = client.getUser(userId).FirstName;
+                string email = client.getUser(userId).Email;
+                string role = client.getRole(roleId);
+
+                //create session variables
+                Session["UserId"] = userId;
+                Session["Name"] = name;
+                Session["Email"] = email;
+                Session["Role"] = role;
+
+                //redirect to index
                 Response.Redirect("index.aspx");
             }
             else

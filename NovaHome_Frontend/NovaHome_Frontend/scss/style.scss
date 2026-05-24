@@ -330,10 +330,11 @@ h1, h2, h3, h4, h5,
 	font-size: 20px;
 }
 
-.hero-wrap{
+.hero-wrap {
 	width: 100%;
 	position: relative;
-	.overlay{
+
+	.overlay {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -344,25 +345,29 @@ h1, h2, h3, h4, h5,
 		width: 50%;
 		background: $primary;
 	}
-	.slider-text{
+
+	.slider-text {
 		color: $white;
 		position: relative;
-		.breadcrumbs{
+
+		.breadcrumbs {
 			text-transform: uppercase;
 			font-size: 12px;
 			letter-spacing: 3px;
 			margin-bottom: 0;
 			z-index: 99;
 			font-weight: 300;
-			span{
+
+			span {
 				color: rgba(0,0,0,1);
-				a{
+
+				a {
 					color: $black;
 				}
 			}
 		}
 
-		.bread{
+		.bread {
 			font-weight: 800;
 			color: $black;
 			font-size: 30px;
@@ -370,19 +375,21 @@ h1, h2, h3, h4, h5,
 			letter-spacing: 3px;
 			text-transform: uppercase;
 		}
-		.btn-primary{
+
+		.btn-primary {
 			border: 1px solid rgba(255,255,255,.4);
 			@include border-radius(30px);
-			&:hover, &:focus{
+
+			&:hover, &:focus {
 				background: $white !important;
 				color: $black;
 			}
 		}
 	}
-	&.hero-bread{
+
+	&.hero-bread {
 		padding: 12em 0;
 	}
-
 }
 
 

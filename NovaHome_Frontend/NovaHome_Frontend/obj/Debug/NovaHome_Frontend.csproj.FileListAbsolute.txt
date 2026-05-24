@@ -52,8 +52,8 @@ C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\bin\ro
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.csproj.AssemblyReference.cache
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.csproj.CoreCompileInputs.cache
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.csproj.CopyComplete
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.dll
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.pdb
-C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.csproj.CopyComplete
+C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.csproj.AssemblyReference.cache

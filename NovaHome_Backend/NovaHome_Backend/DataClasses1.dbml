@@ -63,8 +63,8 @@
   </Table>
   <Table Name="dbo.UserRole" Member="UserRoles">
     <Type Name="UserRole">
-      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="roleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="roleId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="Role_UserRole" Member="Role" ThisKey="roleId" OtherKey="roleId" Type="Role" IsForeignKey="true" />
       <Association Name="SystemUser_UserRole" Member="SystemUser" ThisKey="userId" OtherKey="UserId" Type="SystemUser" IsForeignKey="true" />
     </Type>

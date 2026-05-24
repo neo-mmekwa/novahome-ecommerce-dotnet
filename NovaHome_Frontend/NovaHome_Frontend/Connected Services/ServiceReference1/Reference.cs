@@ -138,6 +138,67 @@ namespace NovaHome_Frontend.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserRoleDTO", Namespace="http://schemas.datacontract.org/2004/07/NovaHome_Backend")]
+    [System.SerializableAttribute()]
+    public partial class UserRoleDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int roleIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int userIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int roleId {
+            get {
+                return this.roleIdField;
+            }
+            set {
+                if ((this.roleIdField.Equals(value) != true)) {
+                    this.roleIdField = value;
+                    this.RaisePropertyChanged("roleId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int userId {
+            get {
+                return this.userIdField;
+            }
+            set {
+                if ((this.userIdField.Equals(value) != true)) {
+                    this.userIdField = value;
+                    this.RaisePropertyChanged("userId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IService1")]
     public interface IService1 {
@@ -149,10 +210,22 @@ namespace NovaHome_Frontend.ServiceReference1 {
         System.Threading.Tasks.Task<string> isRegAsync(NovaHome_Frontend.ServiceReference1.SystemUserDTO user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/isLoggedIn", ReplyAction="http://tempuri.org/IService1/isLoggedInResponse")]
-        bool isLoggedIn(string email, string password);
+        NovaHome_Frontend.ServiceReference1.UserRoleDTO isLoggedIn(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/isLoggedIn", ReplyAction="http://tempuri.org/IService1/isLoggedInResponse")]
-        System.Threading.Tasks.Task<bool> isLoggedInAsync(string email, string password);
+        System.Threading.Tasks.Task<NovaHome_Frontend.ServiceReference1.UserRoleDTO> isLoggedInAsync(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getUser", ReplyAction="http://tempuri.org/IService1/getUserResponse")]
+        NovaHome_Frontend.ServiceReference1.SystemUserDTO getUser(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getUser", ReplyAction="http://tempuri.org/IService1/getUserResponse")]
+        System.Threading.Tasks.Task<NovaHome_Frontend.ServiceReference1.SystemUserDTO> getUserAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getRole", ReplyAction="http://tempuri.org/IService1/getRoleResponse")]
+        string getRole(int roleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/getRole", ReplyAction="http://tempuri.org/IService1/getRoleResponse")]
+        System.Threading.Tasks.Task<string> getRoleAsync(int roleId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/setUserRole", ReplyAction="http://tempuri.org/IService1/setUserRoleResponse")]
         bool setUserRole(int userId, int roleId);
@@ -196,12 +269,28 @@ namespace NovaHome_Frontend.ServiceReference1 {
             return base.Channel.isRegAsync(user);
         }
         
-        public bool isLoggedIn(string email, string password) {
+        public NovaHome_Frontend.ServiceReference1.UserRoleDTO isLoggedIn(string email, string password) {
             return base.Channel.isLoggedIn(email, password);
         }
         
-        public System.Threading.Tasks.Task<bool> isLoggedInAsync(string email, string password) {
+        public System.Threading.Tasks.Task<NovaHome_Frontend.ServiceReference1.UserRoleDTO> isLoggedInAsync(string email, string password) {
             return base.Channel.isLoggedInAsync(email, password);
+        }
+        
+        public NovaHome_Frontend.ServiceReference1.SystemUserDTO getUser(int userId) {
+            return base.Channel.getUser(userId);
+        }
+        
+        public System.Threading.Tasks.Task<NovaHome_Frontend.ServiceReference1.SystemUserDTO> getUserAsync(int userId) {
+            return base.Channel.getUserAsync(userId);
+        }
+        
+        public string getRole(int roleId) {
+            return base.Channel.getRole(roleId);
+        }
+        
+        public System.Threading.Tasks.Task<string> getRoleAsync(int roleId) {
+            return base.Channel.getRoleAsync(roleId);
         }
         
         public bool setUserRole(int userId, int roleId) {

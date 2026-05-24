@@ -13,7 +13,47 @@ namespace NovaHome_Backend
         //link db with service 
         DataClasses1DataContext db = new DataClasses1DataContext();
 
-        public bool isLoggedIn(string email, string password)
+        public string getRole(int roleId)
+        {
+            //find role
+            var role = (from r in db.Roles
+                        where r.roleId == roleId
+                        select r).FirstOrDefault();
+
+            //check if role exists and return its name
+            if (role != null)
+            {
+                return role.roleName;
+            }
+            else 
+            {
+                return null;
+            }
+        }
+
+        public SystemUserDTO getUser(int userId)
+        {
+            //find user 
+            var user = (from u in db.SystemUsers
+                        where u.UserId == userId
+                        select new SystemUserDTO
+                        { 
+                            FirstName = u.FirstName,
+                            Email = u.Email
+                        }).FirstOrDefault();
+
+            //check if they exist and return them
+            if (user != null)
+            {
+                return user;
+            }
+            else
+            {
+                return null; 
+            }
+        }
+
+        public UserRoleDTO isLoggedIn(string email, string password)
         {
             //find user 
             var user = (from u in db.SystemUsers
@@ -21,7 +61,7 @@ namespace NovaHome_Backend
                         select u).FirstOrDefault();
 
             //check if user exists 
-            if(user != null)
+            if (user != null)
             {
                 //create login record - tracking user login activity
                 var login = new UserLogin
@@ -31,17 +71,25 @@ namespace NovaHome_Backend
                 };
                 db.UserLogins.InsertOnSubmit(login);
                 db.SubmitChanges();
-               
-                return true;//user exists
+
+                //find the user's role and return it
+                var usersRole = (from ur in db.UserRoles
+                                where ur.userId == user.UserId
+                                select new UserRoleDTO
+                                {
+                                    userId = ur.userId,
+                                    roleId = ur.roleId
+                                }).FirstOrDefault();
+
+                return usersRole; 
             }
             else
             {
-                return false; //user doesnt exist
+                return null; //user doesnt exist
             }
         }
 
-
-        string IService1.isReg(SystemUserDTO user)
+        public string isReg(SystemUserDTO user)
         {
             try
             {
@@ -79,7 +127,7 @@ namespace NovaHome_Backend
                 db.SubmitChanges();
 
                 //set user role to customer by default
-                /*
+                
                 UserRole userRole = new UserRole
                 {
                     userId = newUser.UserId,
@@ -87,7 +135,7 @@ namespace NovaHome_Backend
                 };
                 //insert user role in db
                 db.UserRoles.InsertOnSubmit(userRole);
-                db.SubmitChanges();*/
+                db.SubmitChanges();
 
                 return "success";
             }
@@ -99,7 +147,7 @@ namespace NovaHome_Backend
 
         }
 
-        bool IService1.setUserRole(int userId, int roleId)
+        public bool setUserRole(int userId, int roleId)
         {
             //find user using id 
             var user = (from u in db.UserRoles

@@ -74,6 +74,12 @@
     <Content Include="checkout.aspx" />
     <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
     <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
+    <Content Include="Connected Services\ServiceReference1\NovaHome_Frontend.ServiceReference1.SystemUserDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceReference1\NovaHome_Frontend.ServiceReference1.UserRoleDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -113,6 +119,55 @@
     <Content Include="images\choose-1.jpg" />
     <Content Include="images\choose-2.jpg" />
     <Content Include="images\choose-3.jpg" />
+    <Content Include="images\furniture\header.jpg" />
+    <Content Include="images\furniture\home.jpg" />
+    <Content Include="images\furniture\home1.jpg" />
+    <Content Include="images\furniture\home2.jpg" />
+    <Content Include="images\furniture\home3.jpg" />
+    <Content Include="images\furniture\home4.jpg" />
+    <Content Include="images\furniture\index.jpg" />
+    <Content Include="images\furniture\living-room-1853203_1280.jpg" />
+    <Content Include="images\furniture\living-room-2155376_1280.jpg" />
+    <Content Include="images\furniture\login.jpg" />
+    <Content Include="images\furniture\pexels-cottonbro-4067759.jpg" />
+    <Content Include="images\furniture\pexels-dolores-456976010-34559308.jpg" />
+    <Content Include="images\furniture\pexels-filipp-romanovski-297235844-13286776.jpg" />
+    <Content Include="images\furniture\pexels-gabby-k-6621035.jpg" />
+    <Content Include="images\furniture\pexels-heyho-6758282.jpg" />
+    <Content Include="images\furniture\pexels-heyho-6758776.jpg" />
+    <Content Include="images\furniture\pexels-heyho-7534539.jpg" />
+    <Content Include="images\furniture\pexels-heyho-8089074.jpg" />
+    <Content Include="images\furniture\pexels-hormel-1431176-2762247.jpg" />
+    <Content Include="images\furniture\pexels-houzlook-3356416.jpg" />
+    <Content Include="images\furniture\pexels-ivan-s-7394471.jpg" />
+    <Content Include="images\furniture\pexels-ivan-s-7671232.jpg" />
+    <Content Include="images\furniture\pexels-julieaagaard-2207894.jpg" />
+    <Content Include="images\furniture\pexels-karola-g-4210810.jpg" />
+    <Content Include="images\furniture\pexels-karola-g-7607331.jpg" />
+    <Content Include="images\furniture\pexels-karola-g-7607460.jpg" />
+    <Content Include="images\furniture\pexels-keeganjchecks-12715512.jpg" />
+    <Content Include="images\furniture\pexels-kseniachernaya-3952048.jpg" />
+    <Content Include="images\furniture\pexels-lysenkow-2258083.jpg" />
+    <Content Include="images\furniture\pexels-mart-production-7606067.jpg" />
+    <Content Include="images\furniture\pexels-mike-panton-62199640-34590745.jpg" />
+    <Content Include="images\furniture\pexels-nadine-wuchenauer-695910-1528975.jpg" />
+    <Content Include="images\furniture\pexels-olly-3757055.jpg" />
+    <Content Include="images\furniture\pexels-pixabay-276583.jpg" />
+    <Content Include="images\furniture\pexels-rachel-claire-4846097.jpg" />
+    <Content Include="images\furniture\pexels-rachel-claire-5490380.jpg" />
+    <Content Include="images\furniture\pexels-rdne-8580720.jpg" />
+    <Content Include="images\furniture\pexels-roman-odintsov-8514224.jpg" />
+    <Content Include="images\furniture\pexels-ron-lach-10222712.jpg" />
+    <Content Include="images\furniture\pexels-thisispav-29350088.jpg" />
+    <Content Include="images\furniture\pexels-ushindinamegabe-15743373.jpg" />
+    <Content Include="images\furniture\pexels-valeriya-kobzar-42371713-7407771.jpg" />
+    <Content Include="images\furniture\pexels-whynugrohou-3097112.jpg" />
+    <Content Include="images\furniture\pexels-yankrukov-5793655.jpg" />
+    <Content Include="images\furniture\pexels-zvolskiy-2082092.jpg" />
+    <Content Include="images\furniture\real-estate-9053405_1280.jpg" />
+    <Content Include="images\furniture\register.jpg" />
+    <Content Include="images\furniture\sofa-5055005_1280.jpg" />
+    <Content Include="images\furniture\sofa-7347875_1280.jpg" />
     <Content Include="images\gallery-1.jpg" />
     <Content Include="images\gallery-2.jpg" />
     <Content Include="images\gallery-3.jpg" />
@@ -161,6 +216,7 @@
     <Content Include="js\range.js" />
     <Content Include="js\scrollax.min.js" />
     <Content Include="login.aspx" />
+    <Content Include="logout.aspx" />
     <Content Include="product.aspx" />
     <Content Include="register.aspx" />
     <Content Include="shop.aspx" />
@@ -215,6 +271,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Master.Master.cs">
       <DependentUpon>Master.Master</DependentUpon>

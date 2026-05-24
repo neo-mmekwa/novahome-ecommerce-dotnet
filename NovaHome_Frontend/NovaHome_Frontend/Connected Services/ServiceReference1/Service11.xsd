@@ -11,4 +11,11 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SystemUserDTO" nillable="true" type="tns:SystemUserDTO" />
+  <xs:complexType name="UserRoleDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="roleId" type="xs:int" />
+      <xs:element minOccurs="0" name="userId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserRoleDTO" nillable="true" type="tns:UserRoleDTO" />
 </xs:schema>

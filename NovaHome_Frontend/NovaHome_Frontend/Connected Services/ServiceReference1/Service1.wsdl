@@ -19,6 +19,18 @@
   <wsdl:message name="IService1_isLoggedIn_OutputMessage">
     <wsdl:part name="parameters" element="tns:isLoggedInResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_getUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUser" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:getRole" />
+  </wsdl:message>
+  <wsdl:message name="IService1_getRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getRoleResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_setUserRole_InputMessage">
     <wsdl:part name="parameters" element="tns:setUserRole" />
   </wsdl:message>
@@ -33,6 +45,14 @@
     <wsdl:operation name="isLoggedIn">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/isLoggedIn" message="tns:IService1_isLoggedIn_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/isLoggedInResponse" message="tns:IService1_isLoggedIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getUser" message="tns:IService1_getUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getUserResponse" message="tns:IService1_getUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/getRole" message="tns:IService1_getRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/getRoleResponse" message="tns:IService1_getRole_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="setUserRole">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/setUserRole" message="tns:IService1_setUserRole_InputMessage" />
@@ -52,6 +72,24 @@
     </wsdl:operation>
     <wsdl:operation name="isLoggedIn">
       <soap:operation soapAction="http://tempuri.org/IService1/isLoggedIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <soap:operation soapAction="http://tempuri.org/IService1/getUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRole">
+      <soap:operation soapAction="http://tempuri.org/IService1/getRole" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

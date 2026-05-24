@@ -15,7 +15,13 @@ namespace NovaHome_Backend
         string isReg(SystemUserDTO user);
 
         [OperationContract]
-        bool isLoggedIn(string email, string password);
+        UserRoleDTO isLoggedIn(string email, string password);
+
+        [OperationContract]
+        SystemUserDTO getUser(int userId);
+
+        [OperationContract]
+        string getRole(int roleId);
 
         [OperationContract]
         bool setUserRole(int userId, int roleId);
@@ -40,13 +46,12 @@ namespace NovaHome_Backend
         public bool isActive { get; set; }
     }
 
+    [DataContract]
     public class UserRoleDTO
-    { 
+    {
         [DataMember]
-        public int UserId { get; set; }
-
+        public int userId { get; set; }
         [DataMember]
-        public int RoldId { get; set; }
+        public int roleId { get; set; }
     }
-
 }
