@@ -56,4 +56,3 @@ C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\De
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.csproj.CopyComplete
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.dll
 C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.pdb
-C:\Users\mmekw\source\repos\Nova-Home\NovaHome_Frontend\NovaHome_Frontend\obj\Debug\NovaHome_Frontend.csproj.AssemblyReference.cache

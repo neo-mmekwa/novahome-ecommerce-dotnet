@@ -13,17 +13,20 @@ namespace NovaHome_Backend
         //link db with service 
         DataClasses1DataContext db = new DataClasses1DataContext();
 
-        public bool deleteUser(int userId)
+        public bool deleteUser(int userId, string password )
         {
             //find user 
             var user = (from u in db.SystemUsers
-                        where u.UserId == userId && u.isActive==true
+                        where u.UserId == userId &&u.Password == password && u.isActive == true
                         select u).FirstOrDefault();
 
+           
             //check if user exists
             if (user != null)
             {
-                db.SystemUsers.DeleteOnSubmit(user);
+                //set user activity to false
+                user.isActive = false;
+                
                 try
                 {
                     db.SubmitChanges();
@@ -95,11 +98,14 @@ namespace NovaHome_Backend
         {
             //find user 
             var user = (from u in db.SystemUsers
-                        where u.UserId == userId
+                        where u.UserId == userId && u.isActive == true
                         select new SystemUserDTO
                         { 
                             FirstName = u.FirstName,
-                            Email = u.Email
+                            LastName = u.LastName,
+                            Email = u.Email,
+                            PhoneNumber = u.PhoneNumber,
+                            isActive = u.isActive
                         }).FirstOrDefault();
 
             //check if they exist and return them
@@ -117,7 +123,7 @@ namespace NovaHome_Backend
         {
             //find user 
             var user = (from u in db.SystemUsers
-                        where u.Email == email && u.Password == password
+                        where u.Email == email && u.Password == password && u.isActive == true
                         select u).FirstOrDefault();
 
             //check if user exists 
@@ -155,7 +161,7 @@ namespace NovaHome_Backend
             {
                 //check if user exists by email 
                 var existingEmail = (from u in db.SystemUsers
-                                     where u.Email == user.Email
+                                     where u.Email == user.Email && u.isActive == true
                                      select u).FirstOrDefault();
 
                 //email exists return false
@@ -215,7 +221,7 @@ namespace NovaHome_Backend
                         select u).FirstOrDefault();
 
             //check if user exists
-            if (user == null)
+            if (user != null)
             {
                 //reset password
                 user.Password = newPassword;
@@ -241,7 +247,7 @@ namespace NovaHome_Backend
         {
             //find user using id 
             var user = (from u in db.UserRoles
-                        where u.userId == userId && u.roleId == roleId
+                        where u.userId == userId && u.roleId == roleId 
                         select u).FirstOrDefault();
 
             // if user does not exist
@@ -271,7 +277,6 @@ namespace NovaHome_Backend
                 return false;
             }
         }
-
 
     }
 }

@@ -34,12 +34,8 @@ namespace NovaHome_Backend
         bool editUser(int userId, string fName, string lName, string email, string phone);
 
         [OperationContract]
-        bool deleteUser(int userId);
+        bool deleteUser(int userId, string password);
 
-        //PRODUCT MANAGEMENT 
-
-
-        //ORDER MANAGEMENT 
     }
 
 
@@ -47,6 +43,8 @@ namespace NovaHome_Backend
     [DataContract]
     public class SystemUserDTO
     {
+        [DataMember]
+        public int UserId { get; set; }
         [DataMember]
         public string FirstName { get; set; }
 
@@ -61,6 +59,8 @@ namespace NovaHome_Backend
         public string Password { get; set; }
         [DataMember]
         public bool isActive { get; set; }
+        [DataMember]
+        public DateTime CreatedAt { get; set; }
     }
 
     [DataContract]

@@ -80,7 +80,7 @@
                                 <a class="dropdown-item" href="shop.aspx">Shop</a>
                                 <a class="dropdown-item" href="product.aspx">Single Product</a>
                                 <a class="dropdown-item" href="cart.aspx">Cart</a>
-                                <a class="dropdown-item" href="checkout">Checkout</a>
+                                <a class="dropdown-item" href="checkout.aspx">Checkout</a>
                             </div>
                         </li>
                         <li class="nav-item" id="liAbout" runat="server"><a href="about.aspx" class="nav-link">About</a></li>
@@ -89,10 +89,9 @@
                         <li class="nav-item dropdown" id="ddMyAccount" runat="server">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown05" runat="server" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Reset Password</a>
-                                <a class="dropdown-item" href="logout.aspx">Logout</a>
+                                <a class="dropdown-item" href="profile.aspx">Profile</a>
                                 <a class="dropdown-item" href="#">Order History</a>
+                                <a class="dropdown-item" href="logout.aspx">Logout</a>
                             </div>
                         </li>
 

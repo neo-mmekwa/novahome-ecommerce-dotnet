@@ -23,6 +23,9 @@ namespace NovaHome_Frontend.ServiceReference1 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreatedAtField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -38,6 +41,9 @@ namespace NovaHome_Frontend.ServiceReference1 {
         private string PhoneNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool isActiveField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -47,6 +53,19 @@ namespace NovaHome_Frontend.ServiceReference1 {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreatedAt {
+            get {
+                return this.CreatedAtField;
+            }
+            set {
+                if ((this.CreatedAtField.Equals(value) != true)) {
+                    this.CreatedAtField = value;
+                    this.RaisePropertyChanged("CreatedAt");
+                }
             }
         }
         
@@ -111,6 +130,19 @@ namespace NovaHome_Frontend.ServiceReference1 {
                 if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
                     this.PhoneNumberField = value;
                     this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
                 }
             }
         }
@@ -232,6 +264,24 @@ namespace NovaHome_Frontend.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/setUserRole", ReplyAction="http://tempuri.org/IService1/setUserRoleResponse")]
         System.Threading.Tasks.Task<bool> setUserRoleAsync(int userId, int roleId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/resetPassword", ReplyAction="http://tempuri.org/IService1/resetPasswordResponse")]
+        bool resetPassword(int userId, string newPassword);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/resetPassword", ReplyAction="http://tempuri.org/IService1/resetPasswordResponse")]
+        System.Threading.Tasks.Task<bool> resetPasswordAsync(int userId, string newPassword);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/editUser", ReplyAction="http://tempuri.org/IService1/editUserResponse")]
+        bool editUser(int userId, string fName, string lName, string email, string phone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/editUser", ReplyAction="http://tempuri.org/IService1/editUserResponse")]
+        System.Threading.Tasks.Task<bool> editUserAsync(int userId, string fName, string lName, string email, string phone);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/deleteUser", ReplyAction="http://tempuri.org/IService1/deleteUserResponse")]
+        bool deleteUser(int userId, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/deleteUser", ReplyAction="http://tempuri.org/IService1/deleteUserResponse")]
+        System.Threading.Tasks.Task<bool> deleteUserAsync(int userId, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -299,6 +349,30 @@ namespace NovaHome_Frontend.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> setUserRoleAsync(int userId, int roleId) {
             return base.Channel.setUserRoleAsync(userId, roleId);
+        }
+        
+        public bool resetPassword(int userId, string newPassword) {
+            return base.Channel.resetPassword(userId, newPassword);
+        }
+        
+        public System.Threading.Tasks.Task<bool> resetPasswordAsync(int userId, string newPassword) {
+            return base.Channel.resetPasswordAsync(userId, newPassword);
+        }
+        
+        public bool editUser(int userId, string fName, string lName, string email, string phone) {
+            return base.Channel.editUser(userId, fName, lName, email, phone);
+        }
+        
+        public System.Threading.Tasks.Task<bool> editUserAsync(int userId, string fName, string lName, string email, string phone) {
+            return base.Channel.editUserAsync(userId, fName, lName, email, phone);
+        }
+        
+        public bool deleteUser(int userId, string password) {
+            return base.Channel.deleteUser(userId, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> deleteUserAsync(int userId, string password) {
+            return base.Channel.deleteUserAsync(userId, password);
         }
     }
 }
