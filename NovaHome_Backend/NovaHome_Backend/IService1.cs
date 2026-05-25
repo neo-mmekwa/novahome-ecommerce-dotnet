@@ -26,6 +26,20 @@ namespace NovaHome_Backend
 
         [OperationContract]
         bool setUserRole(int userId, int roleId);
+
+        [OperationContract]
+        bool resetPassword(int userId, string newPassword);
+
+        [OperationContract]
+        bool editUser(int userId, string fName, string lName, string email, string phone);
+
+        [OperationContract]
+        bool deleteUser(int userId);
+
+        //PRODUCT MANAGEMENT 
+
+
+        //ORDER MANAGEMENT 
     }
 
 

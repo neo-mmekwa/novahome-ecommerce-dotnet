@@ -13,6 +13,66 @@ namespace NovaHome_Backend
         //link db with service 
         DataClasses1DataContext db = new DataClasses1DataContext();
 
+        public bool deleteUser(int userId)
+        {
+            //find user 
+            var user = (from u in db.SystemUsers
+                        where u.UserId == userId && u.isActive==true
+                        select u).FirstOrDefault();
+
+            //check if user exists
+            if (user != null)
+            {
+                db.SystemUsers.DeleteOnSubmit(user);
+                try
+                {
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool editUser(int userId, string fName, string lName, string email, string phone)
+        {
+            //find user 
+            var user = (from u in db.SystemUsers
+                        where u.UserId == userId && u.isActive == true
+                        select u).FirstOrDefault();
+
+            //check if user exists and submit edits 
+            if (user != null)
+            {
+                //assign updated values
+                user.FirstName = fName;
+                user.LastName = lName;
+                user.Email = email;
+                user.PhoneNumber = phone;
+
+                try
+                {
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                //user doesnt exist
+                return false;
+            }
+        }
+
         public string getRole(int roleId)
         {
             //find role
@@ -147,6 +207,36 @@ namespace NovaHome_Backend
 
         }
 
+        public bool resetPassword(int userId, string newPassword)
+        {
+            //find user 
+            var user = (from u in db.SystemUsers
+                        where u.UserId == userId && u.isActive == true
+                        select u).FirstOrDefault();
+
+            //check if user exists
+            if (user == null)
+            {
+                //reset password
+                user.Password = newPassword;
+                try
+                {
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                //user doesnt exist
+                return false;
+            }
+
+        }
+
         public bool setUserRole(int userId, int roleId)
         {
             //find user using id 
@@ -157,7 +247,7 @@ namespace NovaHome_Backend
             // if user does not exist
             if(user == null)
             {
-                //set the users additional role 
+                //set the users role 
                 UserRole userRole = new UserRole
                 {
                     userId = userId,
@@ -168,7 +258,6 @@ namespace NovaHome_Backend
                 db.UserRoles.InsertOnSubmit(userRole);
                 try
                 {
-                    //submit chnages 
                     db.SubmitChanges();
                     return true;
                 }
