@@ -66,6 +66,26 @@
     <Content Include="App_Data\NovaHomeDB_log.ldf">
       <DependentUpon>NovaHomeDB.mdf</DependentUpon>
     </Content>
+    <Content Include="images\chairs\chair1.jpg" />
+    <Content Include="images\chairs\chair2.jpg" />
+    <Content Include="images\chairs\chair3.jpg" />
+    <Content Include="images\chairs\chair4.jpg" />
+    <Content Include="images\couches\couch1.jpg" />
+    <Content Include="images\couches\couch2.jpg" />
+    <Content Include="images\couches\couch3.jpg" />
+    <Content Include="images\couches\couch4.jpg" />
+    <Content Include="images\lights\light1.jpg" />
+    <Content Include="images\lights\light2.jpg" />
+    <Content Include="images\lights\light3.jpg" />
+    <Content Include="images\lights\light4.jpg" />
+    <Content Include="images\pillows\pillow1.jpg" />
+    <Content Include="images\pillows\pillow2.jpg" />
+    <Content Include="images\pillows\pillow3.jpg" />
+    <Content Include="images\pillows\pillow4.jpg" />
+    <Content Include="images\tables\table1.jpg" />
+    <Content Include="images\tables\table2.jpg" />
+    <Content Include="images\tables\table3.jpg" />
+    <Content Include="images\tables\table4.jpg" />
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
