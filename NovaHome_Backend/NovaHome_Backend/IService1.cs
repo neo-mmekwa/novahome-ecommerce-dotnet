@@ -36,6 +36,8 @@ namespace NovaHome_Backend
         [OperationContract]
         bool deleteUser(int userId, string password);
 
+   
+
     }
 
 

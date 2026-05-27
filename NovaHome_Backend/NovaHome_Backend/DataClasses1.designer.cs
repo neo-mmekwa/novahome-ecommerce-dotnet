@@ -51,6 +51,18 @@ namespace NovaHome_Backend
     partial void InsertUserRole(UserRole instance);
     partial void UpdateUserRole(UserRole instance);
     partial void DeleteUserRole(UserRole instance);
+    partial void InsertCart(Cart instance);
+    partial void UpdateCart(Cart instance);
+    partial void DeleteCart(Cart instance);
+    partial void InsertCartItem(CartItem instance);
+    partial void UpdateCartItem(CartItem instance);
+    partial void DeleteCartItem(CartItem instance);
+    partial void InsertWishlist(Wishlist instance);
+    partial void UpdateWishlist(Wishlist instance);
+    partial void DeleteWishlist(Wishlist instance);
+    partial void InsertWishlistItem(WishlistItem instance);
+    partial void UpdateWishlistItem(WishlistItem instance);
+    partial void DeleteWishlistItem(WishlistItem instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -136,6 +148,38 @@ namespace NovaHome_Backend
 			get
 			{
 				return this.GetTable<UserRole>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Cart> Carts
+		{
+			get
+			{
+				return this.GetTable<Cart>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CartItem> CartItems
+		{
+			get
+			{
+				return this.GetTable<CartItem>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Wishlist> Wishlists
+		{
+			get
+			{
+				return this.GetTable<Wishlist>();
+			}
+		}
+		
+		public System.Data.Linq.Table<WishlistItem> WishlistItems
+		{
+			get
+			{
+				return this.GetTable<WishlistItem>();
 			}
 		}
 	}
@@ -317,6 +361,10 @@ namespace NovaHome_Backend
 		
 		private EntitySet<ProductCategory> _ProductCategories;
 		
+		private EntitySet<CartItem> _CartItems;
+		
+		private EntitySet<WishlistItem> _WishlistItems;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -344,6 +392,8 @@ namespace NovaHome_Backend
 		public Product()
 		{
 			this._ProductCategories = new EntitySet<ProductCategory>(new Action<ProductCategory>(this.attach_ProductCategories), new Action<ProductCategory>(this.detach_ProductCategories));
+			this._CartItems = new EntitySet<CartItem>(new Action<CartItem>(this.attach_CartItems), new Action<CartItem>(this.detach_CartItems));
+			this._WishlistItems = new EntitySet<WishlistItem>(new Action<WishlistItem>(this.attach_WishlistItems), new Action<WishlistItem>(this.detach_WishlistItems));
 			OnCreated();
 		}
 		
@@ -540,6 +590,32 @@ namespace NovaHome_Backend
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_CartItem", Storage="_CartItems", ThisKey="ProductId", OtherKey="ProductId")]
+		public EntitySet<CartItem> CartItems
+		{
+			get
+			{
+				return this._CartItems;
+			}
+			set
+			{
+				this._CartItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_WishlistItem", Storage="_WishlistItems", ThisKey="ProductId", OtherKey="ProductId")]
+		public EntitySet<WishlistItem> WishlistItems
+		{
+			get
+			{
+				return this._WishlistItems;
+			}
+			set
+			{
+				this._WishlistItems.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -567,6 +643,30 @@ namespace NovaHome_Backend
 		}
 		
 		private void detach_ProductCategories(ProductCategory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
+		}
+		
+		private void attach_CartItems(CartItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_CartItems(CartItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = null;
+		}
+		
+		private void attach_WishlistItems(WishlistItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Product = this;
+		}
+		
+		private void detach_WishlistItems(WishlistItem entity)
 		{
 			this.SendPropertyChanging();
 			entity.Product = null;
@@ -953,6 +1053,10 @@ namespace NovaHome_Backend
 		
 		private EntitySet<UserRole> _UserRoles;
 		
+		private EntitySet<Cart> _Carts;
+		
+		private EntitySet<Wishlist> _Wishlists;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -979,6 +1083,8 @@ namespace NovaHome_Backend
 		{
 			this._UserLogins = new EntitySet<UserLogin>(new Action<UserLogin>(this.attach_UserLogins), new Action<UserLogin>(this.detach_UserLogins));
 			this._UserRoles = new EntitySet<UserRole>(new Action<UserRole>(this.attach_UserRoles), new Action<UserRole>(this.detach_UserRoles));
+			this._Carts = new EntitySet<Cart>(new Action<Cart>(this.attach_Carts), new Action<Cart>(this.detach_Carts));
+			this._Wishlists = new EntitySet<Wishlist>(new Action<Wishlist>(this.attach_Wishlists), new Action<Wishlist>(this.detach_Wishlists));
 			OnCreated();
 		}
 		
@@ -1168,6 +1274,32 @@ namespace NovaHome_Backend
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Cart", Storage="_Carts", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<Cart> Carts
+		{
+			get
+			{
+				return this._Carts;
+			}
+			set
+			{
+				this._Carts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Wishlist", Storage="_Wishlists", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<Wishlist> Wishlists
+		{
+			get
+			{
+				return this._Wishlists;
+			}
+			set
+			{
+				this._Wishlists.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1207,6 +1339,30 @@ namespace NovaHome_Backend
 		}
 		
 		private void detach_UserRoles(UserRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.SystemUser = null;
+		}
+		
+		private void attach_Carts(Cart entity)
+		{
+			this.SendPropertyChanging();
+			entity.SystemUser = this;
+		}
+		
+		private void detach_Carts(Cart entity)
+		{
+			this.SendPropertyChanging();
+			entity.SystemUser = null;
+		}
+		
+		private void attach_Wishlists(Wishlist entity)
+		{
+			this.SendPropertyChanging();
+			entity.SystemUser = this;
+		}
+		
+		private void detach_Wishlists(Wishlist entity)
 		{
 			this.SendPropertyChanging();
 			entity.SystemUser = null;
@@ -1470,6 +1626,796 @@ namespace NovaHome_Backend
 						this._userId = default(int);
 					}
 					this.SendPropertyChanged("SystemUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Cart")]
+	public partial class Cart : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CartId;
+		
+		private int _UserId;
+		
+		private System.DateTime _DateCreated;
+		
+		private EntitySet<CartItem> _CartItems;
+		
+		private EntityRef<SystemUser> _SystemUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCartIdChanging(int value);
+    partial void OnCartIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnDateCreatedChanging(System.DateTime value);
+    partial void OnDateCreatedChanged();
+    #endregion
+		
+		public Cart()
+		{
+			this._CartItems = new EntitySet<CartItem>(new Action<CartItem>(this.attach_CartItems), new Action<CartItem>(this.detach_CartItems));
+			this._SystemUser = default(EntityRef<SystemUser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CartId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CartId
+		{
+			get
+			{
+				return this._CartId;
+			}
+			set
+			{
+				if ((this._CartId != value))
+				{
+					this.OnCartIdChanging(value);
+					this.SendPropertyChanging();
+					this._CartId = value;
+					this.SendPropertyChanged("CartId");
+					this.OnCartIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._SystemUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this.OnDateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cart_CartItem", Storage="_CartItems", ThisKey="CartId", OtherKey="CartId")]
+		public EntitySet<CartItem> CartItems
+		{
+			get
+			{
+				return this._CartItems;
+			}
+			set
+			{
+				this._CartItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Cart", Storage="_SystemUser", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public SystemUser SystemUser
+		{
+			get
+			{
+				return this._SystemUser.Entity;
+			}
+			set
+			{
+				SystemUser previousValue = this._SystemUser.Entity;
+				if (((previousValue != value) 
+							|| (this._SystemUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SystemUser.Entity = null;
+						previousValue.Carts.Remove(this);
+					}
+					this._SystemUser.Entity = value;
+					if ((value != null))
+					{
+						value.Carts.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("SystemUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CartItems(CartItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Cart = this;
+		}
+		
+		private void detach_CartItems(CartItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Cart = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CartItem")]
+	public partial class CartItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CartItemId;
+		
+		private int _CartId;
+		
+		private int _ProductId;
+		
+		private int _Quantity;
+		
+		private decimal _TotalPrice;
+		
+		private EntityRef<Cart> _Cart;
+		
+		private EntityRef<Product> _Product;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCartItemIdChanging(int value);
+    partial void OnCartItemIdChanged();
+    partial void OnCartIdChanging(int value);
+    partial void OnCartIdChanged();
+    partial void OnProductIdChanging(int value);
+    partial void OnProductIdChanged();
+    partial void OnQuantityChanging(int value);
+    partial void OnQuantityChanged();
+    partial void OnTotalPriceChanging(decimal value);
+    partial void OnTotalPriceChanged();
+    #endregion
+		
+		public CartItem()
+		{
+			this._Cart = default(EntityRef<Cart>);
+			this._Product = default(EntityRef<Product>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CartItemId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CartItemId
+		{
+			get
+			{
+				return this._CartItemId;
+			}
+			set
+			{
+				if ((this._CartItemId != value))
+				{
+					this.OnCartItemIdChanging(value);
+					this.SendPropertyChanging();
+					this._CartItemId = value;
+					this.SendPropertyChanged("CartItemId");
+					this.OnCartItemIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CartId", DbType="Int NOT NULL")]
+		public int CartId
+		{
+			get
+			{
+				return this._CartId;
+			}
+			set
+			{
+				if ((this._CartId != value))
+				{
+					if (this._Cart.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCartIdChanging(value);
+					this.SendPropertyChanging();
+					this._CartId = value;
+					this.SendPropertyChanged("CartId");
+					this.OnCartIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductId", DbType="Int NOT NULL")]
+		public int ProductId
+		{
+			get
+			{
+				return this._ProductId;
+			}
+			set
+			{
+				if ((this._ProductId != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProductIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProductId = value;
+					this.SendPropertyChanged("ProductId");
+					this.OnProductIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
+		public int Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Decimal(18,2) NOT NULL")]
+		public decimal TotalPrice
+		{
+			get
+			{
+				return this._TotalPrice;
+			}
+			set
+			{
+				if ((this._TotalPrice != value))
+				{
+					this.OnTotalPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cart_CartItem", Storage="_Cart", ThisKey="CartId", OtherKey="CartId", IsForeignKey=true)]
+		public Cart Cart
+		{
+			get
+			{
+				return this._Cart.Entity;
+			}
+			set
+			{
+				Cart previousValue = this._Cart.Entity;
+				if (((previousValue != value) 
+							|| (this._Cart.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Cart.Entity = null;
+						previousValue.CartItems.Remove(this);
+					}
+					this._Cart.Entity = value;
+					if ((value != null))
+					{
+						value.CartItems.Add(this);
+						this._CartId = value.CartId;
+					}
+					else
+					{
+						this._CartId = default(int);
+					}
+					this.SendPropertyChanged("Cart");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_CartItem", Storage="_Product", ThisKey="ProductId", OtherKey="ProductId", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.CartItems.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.CartItems.Add(this);
+						this._ProductId = value.ProductId;
+					}
+					else
+					{
+						this._ProductId = default(int);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Wishlist")]
+	public partial class Wishlist : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _WishlistId;
+		
+		private int _UserId;
+		
+		private System.DateTime _DateCreated;
+		
+		private EntitySet<WishlistItem> _WishlistItems;
+		
+		private EntityRef<SystemUser> _SystemUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnWishlistIdChanging(int value);
+    partial void OnWishlistIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnDateCreatedChanging(System.DateTime value);
+    partial void OnDateCreatedChanged();
+    #endregion
+		
+		public Wishlist()
+		{
+			this._WishlistItems = new EntitySet<WishlistItem>(new Action<WishlistItem>(this.attach_WishlistItems), new Action<WishlistItem>(this.detach_WishlistItems));
+			this._SystemUser = default(EntityRef<SystemUser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WishlistId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int WishlistId
+		{
+			get
+			{
+				return this._WishlistId;
+			}
+			set
+			{
+				if ((this._WishlistId != value))
+				{
+					this.OnWishlistIdChanging(value);
+					this.SendPropertyChanging();
+					this._WishlistId = value;
+					this.SendPropertyChanged("WishlistId");
+					this.OnWishlistIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._SystemUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this.OnDateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Wishlist_WishlistItem", Storage="_WishlistItems", ThisKey="WishlistId", OtherKey="WishlistId")]
+		public EntitySet<WishlistItem> WishlistItems
+		{
+			get
+			{
+				return this._WishlistItems;
+			}
+			set
+			{
+				this._WishlistItems.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SystemUser_Wishlist", Storage="_SystemUser", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public SystemUser SystemUser
+		{
+			get
+			{
+				return this._SystemUser.Entity;
+			}
+			set
+			{
+				SystemUser previousValue = this._SystemUser.Entity;
+				if (((previousValue != value) 
+							|| (this._SystemUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SystemUser.Entity = null;
+						previousValue.Wishlists.Remove(this);
+					}
+					this._SystemUser.Entity = value;
+					if ((value != null))
+					{
+						value.Wishlists.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("SystemUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_WishlistItems(WishlistItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Wishlist = this;
+		}
+		
+		private void detach_WishlistItems(WishlistItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Wishlist = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.WishlistItem")]
+	public partial class WishlistItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _WishlistItemId;
+		
+		private int _WishlistId;
+		
+		private int _ProductId;
+		
+		private EntityRef<Product> _Product;
+		
+		private EntityRef<Wishlist> _Wishlist;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnWishlistItemIdChanging(int value);
+    partial void OnWishlistItemIdChanged();
+    partial void OnWishlistIdChanging(int value);
+    partial void OnWishlistIdChanged();
+    partial void OnProductIdChanging(int value);
+    partial void OnProductIdChanged();
+    #endregion
+		
+		public WishlistItem()
+		{
+			this._Product = default(EntityRef<Product>);
+			this._Wishlist = default(EntityRef<Wishlist>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WishlistItemId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int WishlistItemId
+		{
+			get
+			{
+				return this._WishlistItemId;
+			}
+			set
+			{
+				if ((this._WishlistItemId != value))
+				{
+					this.OnWishlistItemIdChanging(value);
+					this.SendPropertyChanging();
+					this._WishlistItemId = value;
+					this.SendPropertyChanged("WishlistItemId");
+					this.OnWishlistItemIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WishlistId", DbType="Int NOT NULL")]
+		public int WishlistId
+		{
+			get
+			{
+				return this._WishlistId;
+			}
+			set
+			{
+				if ((this._WishlistId != value))
+				{
+					if (this._Wishlist.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnWishlistIdChanging(value);
+					this.SendPropertyChanging();
+					this._WishlistId = value;
+					this.SendPropertyChanged("WishlistId");
+					this.OnWishlistIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductId", DbType="Int NOT NULL")]
+		public int ProductId
+		{
+			get
+			{
+				return this._ProductId;
+			}
+			set
+			{
+				if ((this._ProductId != value))
+				{
+					if (this._Product.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProductIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProductId = value;
+					this.SendPropertyChanged("ProductId");
+					this.OnProductIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_WishlistItem", Storage="_Product", ThisKey="ProductId", OtherKey="ProductId", IsForeignKey=true)]
+		public Product Product
+		{
+			get
+			{
+				return this._Product.Entity;
+			}
+			set
+			{
+				Product previousValue = this._Product.Entity;
+				if (((previousValue != value) 
+							|| (this._Product.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Product.Entity = null;
+						previousValue.WishlistItems.Remove(this);
+					}
+					this._Product.Entity = value;
+					if ((value != null))
+					{
+						value.WishlistItems.Add(this);
+						this._ProductId = value.ProductId;
+					}
+					else
+					{
+						this._ProductId = default(int);
+					}
+					this.SendPropertyChanged("Product");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Wishlist_WishlistItem", Storage="_Wishlist", ThisKey="WishlistId", OtherKey="WishlistId", IsForeignKey=true)]
+		public Wishlist Wishlist
+		{
+			get
+			{
+				return this._Wishlist.Entity;
+			}
+			set
+			{
+				Wishlist previousValue = this._Wishlist.Entity;
+				if (((previousValue != value) 
+							|| (this._Wishlist.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Wishlist.Entity = null;
+						previousValue.WishlistItems.Remove(this);
+					}
+					this._Wishlist.Entity = value;
+					if ((value != null))
+					{
+						value.WishlistItems.Add(this);
+						this._WishlistId = value.WishlistId;
+					}
+					else
+					{
+						this._WishlistId = default(int);
+					}
+					this.SendPropertyChanged("Wishlist");
 				}
 			}
 		}
