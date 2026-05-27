@@ -42,7 +42,8 @@
               "RelativeToolTip": "NovaHome_Backend\\DataClasses1.dbml.layout",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-22T18:20:25.675Z"
+              "WhenOpened": "2026-05-22T18:20:25.675Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -54,7 +55,8 @@
               "RelativeToolTip": "NovaHome_Backend\\DataClasses1.designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-04T11:13:38.022Z"
+              "WhenOpened": "2026-05-04T11:13:38.022Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
