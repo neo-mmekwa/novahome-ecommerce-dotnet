@@ -12,6 +12,7 @@ namespace NovaHome_Backend
     public interface IService1
     {
         //USER MANAGEMENT 
+
         [OperationContract]
         string isReg(SystemUserDTO user);
 
@@ -36,7 +37,50 @@ namespace NovaHome_Backend
         [OperationContract]
         bool deleteUser(int userId, string password);
 
-   
+        //PRODUCT MANAGEMENT 
+
+        [OperationContract]
+        ProductDTO getProduct(int prodId);
+
+        [OperationContract]
+        List<ProductDTO> getProducts();
+
+        [OperationContract]
+        bool createProduct(ProductDTO product);
+
+        [OperationContract]
+        bool editProduct(int prodId, string name, string description, decimal price, int discount, int quantity, string image);
+
+        [OperationContract]
+        bool deleteProduct(int prodId);
+
+
+        //CART MANAGEMENT
+        [OperationContract]
+        int getOrCreateCart(int userId);
+
+        [OperationContract]
+        bool addToCart(int userId, int prodId, int quantity);
+
+        [OperationContract]
+        void updateQuantity(int cartItemId, int newQuantity);
+
+        [OperationContract]
+        bool deleteCartItem(int cartItemId);
+
+        [OperationContract]
+        List<CartItemDTO> getCartItems(int userId);
+
+
+        //WISHLIST 
+        [OperationContract]
+        int getOrCreateWishlist(int userId);
+
+        [OperationContract]
+        bool addToWishlist(int userId, int prodId);
+
+        [OperationContract]
+        bool deleteWishlistItem(int wishlistItemId);
 
     }
 
@@ -72,5 +116,110 @@ namespace NovaHome_Backend
         public int userId { get; set; }
         [DataMember]
         public int roleId { get; set; }
+    }
+    
+    [DataContract]
+    public class ProductDTO
+    {
+        [DataMember]
+        public int ProductId { get; set; }
+
+        [DataMember]
+        public string ProductName { get; set; }
+
+        [DataMember]
+        public string Description { get; set; }
+
+        [DataMember]
+        public decimal Price { get; set; }
+
+        [DataMember]
+        public int DiscountPercent { get; set; }
+
+        [DataMember]
+        public int StockQuantity { get; set; }
+
+        [DataMember]
+        public string ImageURL { get; set; }
+
+        [DataMember]
+        public bool isActive { get; set; }
+
+        [DataMember]
+        public DateTime DateAdded { get; set; }
+    }
+
+    [DataContract]
+    public class CategoryDTO
+    {
+        [DataMember]
+        public int CategoryId { get; set; }
+
+        [DataMember]
+        public string CategoryName { get; set; }
+
+        [DataMember]
+        public string CategoryType { get; set; }
+
+        [DataMember]
+        public bool isActive { get; set; }
+    }
+
+    [DataContract]
+    public class ProductCategoryDTO
+    {
+        [DataMember]
+        public int ProductCategoryId { get; set; }
+
+        [DataMember]
+        public int ProductId { get; set; }
+        
+        [DataMember]
+        public int CategoryId { get; set; }
+    }
+
+    [DataContract]
+    public class CartItemDTO
+    {
+        [DataMember]
+        public int CartItemId { get; set; }
+
+        [DataMember]
+        public int CartId { get; set; }
+
+        [DataMember]
+        public int ProductId { get; set; }
+
+        [DataMember]
+        public int Quantity { get; set; }
+
+        [DataMember]
+        public decimal TotalPrice { get; set; }
+    }
+
+    [DataContract]
+    public class WishlistDTO
+    {
+        [DataMember]
+        public int WishlistId { get; set; }
+
+        [DataMember]
+        public int UserId { get; set; }
+
+        [DataMember]
+        public DateTime DateCreated { get; set; }
+    }
+
+    [DataContract]
+    public class WishlistItemDTO
+    {
+        [DataMember]
+        public int WishlistItemId { get; set;}
+
+        [DataMember]
+        public int WishlistId { get; set; }
+
+        [DataMember]
+        public int ProductId { get; set; }
     }
 }

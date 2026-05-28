@@ -13,20 +13,24 @@ namespace NovaHome_Backend
         //link db with service 
         DataClasses1DataContext db = new DataClasses1DataContext();
 
-        public bool deleteUser(int userId, string password )
+
+        //===========================================================================================================
+        //USER MANAGEMENT 
+        //===========================================================================================================
+        public bool deleteUser(int userId, string password)
         {
             //find user 
             var user = (from u in db.SystemUsers
-                        where u.UserId == userId &&u.Password == password && u.isActive == true
+                        where u.UserId == userId && u.Password == password && u.isActive == true
                         select u).FirstOrDefault();
 
-           
+
             //check if user exists
             if (user != null)
             {
                 //set user activity to false
                 user.isActive = false;
-                
+
                 try
                 {
                     db.SubmitChanges();
@@ -88,7 +92,7 @@ namespace NovaHome_Backend
             {
                 return role.roleName;
             }
-            else 
+            else
             {
                 return null;
             }
@@ -100,7 +104,7 @@ namespace NovaHome_Backend
             var user = (from u in db.SystemUsers
                         where u.UserId == userId && u.isActive == true
                         select new SystemUserDTO
-                        { 
+                        {
                             FirstName = u.FirstName,
                             LastName = u.LastName,
                             Email = u.Email,
@@ -115,7 +119,7 @@ namespace NovaHome_Backend
             }
             else
             {
-                return null; 
+                return null;
             }
         }
 
@@ -140,14 +144,14 @@ namespace NovaHome_Backend
 
                 //find the user's role and return it
                 var usersRole = (from ur in db.UserRoles
-                                where ur.userId == user.UserId
-                                select new UserRoleDTO
-                                {
-                                    userId = ur.userId,
-                                    roleId = ur.roleId
-                                }).FirstOrDefault();
+                                 where ur.userId == user.UserId
+                                 select new UserRoleDTO
+                                 {
+                                     userId = ur.userId,
+                                     roleId = ur.roleId
+                                 }).FirstOrDefault();
 
-                return usersRole; 
+                return usersRole;
             }
             else
             {
@@ -193,7 +197,7 @@ namespace NovaHome_Backend
                 db.SubmitChanges();
 
                 //set user role to customer by default
-                
+
                 UserRole userRole = new UserRole
                 {
                     userId = newUser.UserId,
@@ -247,11 +251,11 @@ namespace NovaHome_Backend
         {
             //find user using id 
             var user = (from u in db.UserRoles
-                        where u.userId == userId && u.roleId == roleId 
+                        where u.userId == userId && u.roleId == roleId
                         select u).FirstOrDefault();
 
             // if user does not exist
-            if(user == null)
+            if (user == null)
             {
                 //set the users role 
                 UserRole userRole = new UserRole
@@ -276,6 +280,209 @@ namespace NovaHome_Backend
             {
                 return false;
             }
+        }
+
+       
+        //===========================================================================================================
+        //PRODUCT MANAGEMENT
+        //===========================================================================================================
+        public bool createProduct(ProductDTO product)
+        {
+            try
+            {
+                //check if product already exists  
+                var prod = (from p in db.Products
+                            where p.ProductName == product.ProductName && p.isActive == true
+                            select p).FirstOrDefault();
+
+
+                //product exists 
+                if (prod !=  null)
+                    return false;
+
+                //create new prod
+                Product newProduct = new Product
+                {
+                    ProductName = product.ProductName,
+                    Description = product.Description,
+                    Price = product.Price,
+                    DiscountPercent = product.DiscountPercent,
+                    StockQuantity = product.StockQuantity,
+                    ImageURL = product.ImageURL,
+                    isActive = true,
+                    DateAdded = DateTime.Now
+                };
+
+                //insert prod and submit to db
+                db.Products.InsertOnSubmit(newProduct);
+                db.SubmitChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool deleteProduct(int prodId)
+        {
+            //find user 
+            var prod = (from p in db.Products
+                        where p.ProductId == prodId && p.isActive == true
+                        select p).FirstOrDefault();
+
+
+            //check if prod exists
+            if (prod != null)
+            {
+                //set prod activity to false
+                prod.isActive = false;
+
+                try
+                {
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool editProduct(int prodId, string name, string description, decimal price, int discount, int quantity, string image)
+        {
+            try
+            {
+                //find prod 
+                var prod = (from p in db.Products
+                            where p.ProductId == prodId && p.isActive == true
+                            select p).FirstOrDefault();
+
+                //check if user exists and submit edits 
+                if (prod != null)
+                {
+                    //assign updated values
+                    prod.ProductName = name;
+                    prod.Description = description;
+                    prod.Price = price;
+                    prod.DiscountPercent = discount;
+                    prod.StockQuantity = quantity;
+                    prod.ImageURL = image;
+
+                    //submit changes
+                    db.SubmitChanges();
+                    return true;
+                }
+                else
+                {
+                    //prod doesnt exist
+                    return false;
+                }
+            } 
+            catch 
+            {
+                return false;
+            }
+            
+        }
+
+        public ProductDTO getProduct(int prodId)
+        {
+            //check if prod exists 
+            var prod = (from p in db.Products
+                        where p.ProductId == prodId && p.isActive == true
+                        select new ProductDTO
+                        {
+                            ProductId = p.ProductId,
+                            ProductName = p.ProductName,
+                            Description = p.Description,
+                            Price = p.Price,
+                            DiscountPercent = p.DiscountPercent,
+                            StockQuantity = p.StockQuantity,
+                            ImageURL = p.ImageURL
+                        }).FirstOrDefault();
+
+            //check if prod exists and return them
+            if (prod != null)
+            {
+                return prod;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<ProductDTO> getProducts()
+        {
+            //find active prods
+            var prods = (from p in db.Products
+                        where p.isActive == true
+                        select new ProductDTO
+                        {
+                            ProductId = p.ProductId,
+                            ProductName = p.ProductName,
+                            Description = p.Description,
+                            Price = p.Price,
+                            DiscountPercent = p.DiscountPercent,
+                            StockQuantity = p.StockQuantity,
+                            ImageURL = p.ImageURL
+                        });
+
+            //return list of prods
+            return prods.ToList();
+        }
+
+        //===========================================================================================================
+        //CART MANAGEMENT 
+        //===========================================================================================================
+        public bool addToCart(int userId, int prodId, int quantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool deleteCartItem(int cartItemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CartItemDTO> getCartItems(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int getOrCreateCart(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateQuantity(int cartItemId, int newQuantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        //===========================================================================================================
+        //WISHLIST MANAGEMENT
+        //===========================================================================================================
+        public bool addToWishlist(int userId, int prodId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool deleteWishlistItem(int wishlistItemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int getOrCreateWishlist(int userId)
+        {
+            throw new NotImplementedException();
         }
 
     }
