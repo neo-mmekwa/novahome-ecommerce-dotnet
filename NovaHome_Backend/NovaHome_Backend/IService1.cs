@@ -195,6 +195,9 @@ namespace NovaHome_Backend
 
         [DataMember]
         public decimal TotalPrice { get; set; }
+
+        [DataMember]
+        public ProductDTO Product { get; set; }
     }
 
     [DataContract]

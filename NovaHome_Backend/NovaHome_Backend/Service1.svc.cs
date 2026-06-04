@@ -511,7 +511,55 @@ namespace NovaHome_Backend
 
         public List<CartItemDTO> getCartItems(int userId)
         {
-            throw new NotImplementedException();
+            //get or create cart for specified user 
+            int cartId = getOrCreateCart(userId);
+
+            //find items that match cartid 
+            var items = (from ci in db.CartItems
+                         where ci.CartId == cartId
+                         select new
+                         {
+                             ci.CartItemId,
+                             ci.CartId,
+                             ci.ProductId,
+                             ci.Quantity,
+                             ci.TotalPrice
+                         }).ToList();
+
+            //get prods 
+            var prods = db.Products.ToList();
+
+            //get cart items 
+            var cartItems = items.Select(i =>
+            {
+                //get prod
+                var prod = (from p in db.Products
+                            where p.ProductId == i.ProductId
+                            select p).FirstOrDefault();
+
+                //return cartitem 
+                return new CartItemDTO
+                {
+                    CartItemId = i.CartItemId,
+                    CartId = i.CartId,
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    TotalPrice = i.TotalPrice,
+
+                    //if prod isnt null return prod
+                    Product = prod != null ? new ProductDTO
+                    {
+                        ProductId = prod.ProductId,
+                        ProductName = prod.ProductName,
+                        Price = prod.Price,
+                        ImageURL = prod.ImageURL,
+                        Description = prod.Description,
+                    } : null
+                };
+            
+            }).ToList();
+
+            return cartItems;
         }
 
         public int getOrCreateCart(int userId)
