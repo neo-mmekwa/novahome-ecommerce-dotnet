@@ -444,7 +444,64 @@ namespace NovaHome_Backend
         //===========================================================================================================
         public bool addToCart(int userId, int prodId, int quantity)
         {
-            throw new NotImplementedException();
+            //check if quantity is 0 or more
+            if(quantity <= 0)
+            {
+                return false;
+            }
+
+            //get cart belonging to user 
+            int cartID = getOrCreateCart(userId);
+
+            //find product 
+            var prod = (from p in db.Products
+                        where p.ProductId == prodId
+                        select p).FirstOrDefault();
+
+            //return false if prod doesnt exist 
+            if (prod == null)
+            {
+                return false;
+            }
+
+            //get product price 
+            decimal unitPrice = prod.Price;
+
+            //find item to be added 
+            var item = (from ci in db.CartItems
+                        where ci.CartId == cartID && ci.ProductId == prodId
+                        select ci).FirstOrDefault();
+            //check if items exist 
+            if (item != null)
+            {
+                //incremenet quantity and recalc total price 
+                item.Quantity += quantity;
+                item.TotalPrice = item.Quantity * unitPrice;
+            }else
+            {
+                //create new item & add to table 
+                var newItem = new CartItem
+                {
+                    CartId = cartID,
+                    ProductId = prodId,
+                    Quantity = quantity,
+                    TotalPrice = unitPrice * quantity
+                };
+
+                db.CartItems.InsertOnSubmit(newItem);
+            }
+            //try to save changes
+            try
+            {
+                //changes submitted successfully
+                db.SubmitChanges();
+                return true;
+            }
+            catch 
+            {
+                //failure in submitting changes 
+                return false;
+            }
         }
 
         public bool deleteCartItem(int cartItemId)
@@ -459,7 +516,39 @@ namespace NovaHome_Backend
 
         public int getOrCreateCart(int userId)
         {
-            throw new NotImplementedException();
+            //get the cart 
+            var cart = (from c in db.Carts
+                        where c.UserId == userId
+                        select c).FirstOrDefault();
+            //check if cart exists
+            if(cart != null)
+            {
+                //get existing cart 
+                return cart.CartId;
+            }
+            else
+            {
+                //create a new cart
+                Cart newCart = new Cart
+                {
+                    UserId = userId
+                };
+
+                //add cart to table 
+                db.Carts.InsertOnSubmit(newCart);
+
+                //try to save changes 
+                try
+                {
+                    db.SubmitChanges();
+                    return newCart.CartId;
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
+
         }
 
         public void updateQuantity(int cartItemId, int newQuantity)
