@@ -327,7 +327,7 @@ namespace NovaHome_Backend
 
         public bool deleteProduct(int prodId)
         {
-            //find user 
+            //find prod 
             var prod = (from p in db.Products
                         where p.ProductId == prodId && p.isActive == true
                         select p).FirstOrDefault();
@@ -506,7 +506,31 @@ namespace NovaHome_Backend
 
         public bool deleteCartItem(int cartItemId)
         {
-            throw new NotImplementedException();
+            //find item 
+            var item = (from i in db.CartItems
+                        where i.CartItemId == cartItemId
+                        select i).FirstOrDefault();
+
+
+            //check if prod exists
+            if (item != null)
+            {
+                //delete item & submit changes to db
+                db.CartItems.DeleteOnSubmit(item);
+                try
+                {
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<CartItemDTO> getCartItems(int userId)
@@ -601,7 +625,46 @@ namespace NovaHome_Backend
 
         public void updateQuantity(int cartItemId, int newQuantity)
         {
-            throw new NotImplementedException();
+            //find the item 
+            var item = (from i in db.CartItems
+                        where i.CartItemId == cartItemId
+                        select i).FirstOrDefault();
+
+            //check if it exists 
+            if (item == null)
+            {
+                return;
+            }
+
+            //check quantity
+            if(newQuantity <= 0)
+            {
+                //delete item
+                db.CartItems.DeleteOnSubmit(item);
+            }else if(newQuantity >- 1)
+            {
+                decimal unitPrice = 0;
+
+                //check if item has prodid
+                if (item.ProductId != null)
+                {
+                    //find prod
+                    var prod = (from p in db.Products
+                                where p.ProductId == item.ProductId
+                                select p).FirstOrDefault();
+
+                    //set unit price to prods price 
+                    if (prod != null)
+                    {
+                        unitPrice = prod.Price;
+                    }
+                }
+                //set items quanitty and total price to new values
+                item.Quantity = newQuantity;
+                item.TotalPrice = unitPrice * newQuantity;
+            }
+            //update db
+            db.SubmitChanges();
         }
 
         //===========================================================================================================
