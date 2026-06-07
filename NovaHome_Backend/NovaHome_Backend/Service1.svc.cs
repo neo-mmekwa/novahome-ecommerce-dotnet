@@ -682,7 +682,38 @@ namespace NovaHome_Backend
 
         public int getOrCreateWishlist(int userId)
         {
-            throw new NotImplementedException();
+            //get the wishlist 
+            var wish = (from w in db.Wishlists
+                        where w.UserId == userId
+                        select w).FirstOrDefault();
+            //check if wishlist exists
+            if (wish != null)
+            {
+                //get existing cart 
+                return wish.WishlistId;
+            }
+            else
+            {
+                //create a new wishlist
+                Wishlist newWish = new Wishlist
+                {
+                    UserId = userId
+                };
+
+                //add wishlist to db table 
+                db.Wishlists.InsertOnSubmit(newWish);
+
+                //try to save changes 
+                try
+                {
+                    db.SubmitChanges();
+                    return newWish.WishlistId;
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
         }
 
     }
