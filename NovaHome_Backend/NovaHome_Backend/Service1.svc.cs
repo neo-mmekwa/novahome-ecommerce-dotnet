@@ -716,12 +716,34 @@ namespace NovaHome_Backend
             }
         }
 
-
         public bool deleteWishlistItem(int wishlistItemId)
         {
-            throw new NotImplementedException();
-        }
+            //find item 
+            var item = (from i in db.WishlistItems
+                        where i.WishlistItemId == wishlistItemId
+                        select i).FirstOrDefault();
 
+
+            //check if prod exists
+            if (item != null)
+            {
+                //delete item & submit changes to db
+                db.WishlistItems.DeleteOnSubmit(item);
+                try
+                {
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public int getOrCreateWishlist(int userId)
         {
